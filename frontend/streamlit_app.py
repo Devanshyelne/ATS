@@ -175,3 +175,5 @@ elif st.session_state.current_view == 'resources':
     # Import and render resources page
     from frontend.views import resources
     resources.render()
+
+    # hii
