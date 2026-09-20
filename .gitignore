@@ -12,3 +12,6 @@ __pycache__/
 # ML models
 *.safetensors
 *.pkl
+
+.env
+.streamlit/secrets.toml
