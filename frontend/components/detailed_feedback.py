@@ -1,8 +1,9 @@
 from typing import Any, Dict, List
 
 import streamlit as st
+from frontend.components._helpers import render_html
 
-from frontend.components._helpers import get_severity_style
+from frontend.components._helpers import get_severity_style, safe_html
 
 
 SEVERITY_ORDER = ["critical", "high", "medium", "low"]
@@ -16,56 +17,64 @@ def _group_by_severity(issues: List[Dict[str, Any]]) -> Dict[str, List[Dict[str,
     return grouped
 
 
-def _render_issue(issue: Dict[str, Any]) -> None:
-    icon, text_color, bg_color = get_severity_style(issue.get("severity_level"))
-    title = issue.get("issue_title", "Untitled issue")
-    impact = issue.get("ats_impact", "")
-    explanation = issue.get("explanation", "")
-    where = issue.get("where_it_appears", "")
-    how_to_fix = issue.get("how_to_fix", "")
-    action_items = issue.get("action_items") or []
-    example = issue.get("example_improvement", "")
-
-    st.markdown(
+def _render_issue(issue: Dict[str, Any], index: int) -> None:
+    severity = (issue.get("severity_level") or "low").lower()
+    severity_label, text_color, _ = get_severity_style(severity)
+    title = safe_html(issue.get("issue_title", "Untitled issue"))
+    impact = safe_html(issue.get("ats_impact", ""))
+    render_html(
         f"""
-        <div style="border-left:4px solid {text_color}; background-color:{bg_color};
-                    padding:0.75rem 1rem; border-radius:6px; margin-bottom:0.5rem;">
-            <strong style="color:{text_color};">{icon} {title}</strong>
-            <span style="color:#666; margin-left:0.5rem; font-size:0.85rem;">{impact}</span>
-        </div>
+        <article class="feedback-card severity-{safe_html(severity)}">
+            <div class="feedback-head">
+                <h4>{title}</h4>
+                <span class="severity-label" style="color:{text_color};">{safe_html(severity_label)}</span>
+            </div>
+            <div class="muted-copy">ATS impact: {impact or 'Not specified'}</div>
+        </article>
         """,
         unsafe_allow_html=True,
     )
 
-    with st.expander("Details", expanded=False):
+    with st.expander("View details", expanded=False):
+        explanation = issue.get("explanation", "")
+        where = issue.get("where_it_appears", "")
+        how_to_fix = issue.get("how_to_fix", "")
+        actions = issue.get("action_items") or []
+        example = issue.get("example_improvement", "")
         if explanation:
-            st.markdown(f"**What's happening:** {explanation}")
+            render_html(f'<div class="detail-label">What is happening</div><p class="detail-copy">{safe_html(explanation)}</p>', unsafe_allow_html=True)
         if where:
-            st.markdown(f"**Where it appears:** {where}")
+            render_html(f'<div class="detail-label">Where it appears</div><p class="detail-copy">{safe_html(where)}</p>', unsafe_allow_html=True)
         if how_to_fix:
-            st.markdown(f"**How to fix:** {how_to_fix}")
-        if action_items:
-            st.markdown("**Action items:**")
-            for item in action_items:
-                st.markdown(f"- {item}")
+            render_html(f'<div class="detail-label">How to fix it</div><p class="detail-copy">{safe_html(how_to_fix)}</p>', unsafe_allow_html=True)
+        if actions:
+            render_html('<div class="detail-label">Action items</div>', unsafe_allow_html=True)
+            render_html('<ul class="check-list">' + "".join(f"<li>{safe_html(item)}</li>" for item in actions) + '</ul>', unsafe_allow_html=True)
         if example:
-            st.markdown("**Example improvement:**")
-            st.code(example, language="text")
+            render_html(f'<div class="detail-label">Example improvement</div><pre class="detail-copy">{safe_html(example)}</pre>', unsafe_allow_html=True)
 
 
 def display_detailed_feedback(analysis: Dict[str, Any]) -> None:
     issues = analysis.get("detailed_feedback") or []
     if not issues:
-        return  # backend produced no per-issue feedback this run
+        return
 
-    st.markdown("### 🔍 Detailed Feedback")
-    st.caption(f"{len(issues)} issue(s) flagged — grouped by severity.")
-
+    render_html(
+        f"""
+        <div class="section-heading">
+            <h3>Detailed feedback</h3>
+            <p>{len(issues)} item(s) grouped by severity. Open an item to see context and a concrete fix.</p>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
     grouped = _group_by_severity(issues)
+    index = 0
     for level in SEVERITY_ORDER:
         items = grouped.get(level, [])
         if not items:
             continue
-        st.markdown(f"#### {level.title()} ({len(items)})")
+        render_html(f'<div class="eyebrow" style="margin:1rem 0 0.55rem;">{level.title()} · {len(items)}</div>', unsafe_allow_html=True)
         for issue in items:
-            _render_issue(issue)
+            _render_issue(issue, index)
+            index += 1
