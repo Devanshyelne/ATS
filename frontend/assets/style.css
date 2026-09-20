@@ -67,7 +67,7 @@
 }
 
 /* ============================================
-   BASE STYLES & TYPOGRAPHY
+BASE STYLES & TYPOGRAPHY
    ============================================ */
 .stApp {
     font-family: var(--font-family-base);
@@ -83,7 +83,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* ============================================
-   SCORE COLOR CLASSES
+SCORE COLOR CLASSES
    ============================================ */
 .score-excellent {
     color: var(--success-color);
@@ -126,7 +126,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 /* ====
 ========================================
-   CARD STYLES
+CARD STYLES
    ============================================ */
 .metric-card {
     background: var(--background-white);
@@ -165,7 +165,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* ============================================
-   PROGRESS BAR STYLES
+PROGRESS BAR STYLES
    ============================================ */
 .progress-container {
     background: var(--background-light);
@@ -226,7 +226,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* ============================================
-   BADGE STYLES
+BADGE STYLES
    ============================================ */
 .badge {
     display: inline-flex;
@@ -284,7 +284,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* ============================================
-   SKILL TAG STYLES
+SKILL TAG STYLES
    ============================================ */
 .skill-tag {
     display: inline-flex;
@@ -334,10 +334,9 @@ h1, h2, h3, h4, h5, h6 {
     border-color: var(--border-color);
     color: var(--text-secondary);
 }
-/
-* ============================================
-   ALERT STYLES
-   ============================================ */
+/*============================================
+ALERT STYLES
+============================================ */
 .alert {
     padding: var(--spacing-md) var(--spacing-lg);
     border-radius: var(--radius-md);
@@ -382,7 +381,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* ============================================
-   BUTTON STYLES
+BUTTON STYLES
    ============================================ */
 .btn {
     display: inline-flex;
@@ -463,7 +462,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 /* =====
 =======================================
-   SECTION HEADERS
+SECTION HEADERS
    ============================================ */
 .section-header {
     font-size: var(--font-size-xl);
@@ -489,7 +488,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* ============================================
-   RECOMMENDATION ITEMS
+RECOMMENDATION ITEMS
    ============================================ */
 .recommendation-item {
     padding: var(--spacing-md) var(--spacing-lg);
@@ -527,7 +526,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* ============================================
-   ANIMATION KEYFRAMES
+ANIMATION KEYFRAMES
    ============================================ */
 @keyframes fadeIn {
     from {
@@ -667,7 +666,7 @@ Animation utility classes */
 .delay-500 { animation-delay: 500ms; }
 
 /* ============================================
-   LOADING STATES & SPINNERS
+LOADING STATES & SPINNERS
    ============================================ */
 .loading-spinner {
     display: inline-block;
@@ -783,8 +782,8 @@ Animation utility classes */
     }
 }
 /*
- ============================================
-   HOVER EFFECTS
+============================================
+HOVER EFFECTS
    ============================================ */
 .hover-lift {
     transition: transform var(--transition-base), box-shadow var(--transition-base);
@@ -835,7 +834,7 @@ Animation utility classes */
 }
 
 /* ============================================
-   FORM ELEMENTS
+FORM ELEMENTS
    ============================================ */
 .form-input {
     width: 100%;
@@ -919,7 +918,7 @@ Animation utility classes */
 }
 /* ====
 ========================================
-   TABLES & DATA DISPLAY
+TABLES & DATA DISPLAY
    ============================================ */
 .data-table {
     width: 100%;
@@ -949,7 +948,7 @@ Animation utility classes */
 }
 
 /* ============================================
-   TOOLTIPS
+TOOLTIPS
    ============================================ */
 .tooltip {
     position: relative;
@@ -981,7 +980,7 @@ Animation utility classes */
 }
 
 /* ============================================
-   MODAL & OVERLAY STYLES
+MODAL & OVERLAY STYLES
    ============================================ */
 .modal-overlay {
     position: fixed;
@@ -1032,7 +1031,7 @@ Animation utility classes */
 }
 
 /* ============================================
-   TABS & NAVIGATION
+TABS & NAVIGATION
    ============================================ */
 .tabs-container {
     display: flex;
@@ -1061,7 +1060,7 @@ Animation utility classes */
 }
 
 /* ============================================
-   ACCORDION / EXPANDER STYLES
+ACCORDION / EXPANDER STYLES
    ============================================ */
 .accordion-item {
     border: 1px solid var(--border-color);
@@ -1098,7 +1097,7 @@ Animation utility classes */
 }
 /* ====
 ========================================
-   RESPONSIVE DESIGN - MOBILE FIRST
+RESPONSIVE DESIGN - MOBILE FIRST
    ============================================ */
 
 /* Extra small devices (phones, less than 576px) */
@@ -1234,7 +1233,7 @@ Animation utility classes */
 }
 /* ==
 ==========================================
-   STREAMLIT-SPECIFIC OVERRIDES
+STREAMLIT-SPECIFIC OVERRIDES
    ============================================ */
 
 /* Streamlit button enhancements */
@@ -1380,7 +1379,7 @@ Animation utility classes */
 }
 /* ==
 ==========================================
-   UTILITY CLASSES
+UTILITY CLASSES
    ============================================ */
 
 /* Text utilities */
@@ -1535,7 +1534,7 @@ Animation utility classes */
 .transition-slow { transition: all var(--transition-slow); }
 
 /* ============================================
-   SPECIAL COMPONENTS
+SPECIAL COMPONENTS
    ============================================ */
 
 /* Score circle display */
